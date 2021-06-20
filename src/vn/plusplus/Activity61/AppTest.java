@@ -13,6 +13,8 @@ public class AppTest extends StoreManagement{
         input.nextLine();
         Store[] stores = new Store[m];
         SmartPhone[] phones;
+        //StoreManagement storeManagement = new StoreManagement();
+        //storeManagement.setStores(stores);
         for(int i=0;i<stores.length;i++) {
             System.out.println("** Nhập vào thông tin cửa hàng thứ " + i);
             System.out.print("\tTên cửa hàng: ");
@@ -22,14 +24,15 @@ public class AppTest extends StoreManagement{
             System.out.print("\tTổng số điện thoại có trong cửa hàng: ");
             int n = input.nextInt(); // Tổng số điện thoại có trong cửa hàng
             input.nextLine();
+
             stores[i] = new Store();
+
             stores[i].setName(name);
             stores[i].setAddress(address);
             stores[i].setN(n);
 
             // Nhập vào thông tin chi tiết các điện thoại có trong cửa hàng
             phones = new SmartPhone[n];
-            StoreManagement[][] storeManagements = new StoreManagement[stores.length][phones.length];
             for (int j = 0; j < phones.length; j++) {
                 System.out.println(" + Info điện thoại " + j + " có trong cửa hàng " + i);
                 System.out.print("\tThương hiệu: ");
@@ -67,8 +70,15 @@ public class AppTest extends StoreManagement{
                 phones[j].setColor(color);
                 phones[j].setPrice(price);
                 phones[j].setTotalSold(totalsold);
-
+                //storeManagement.setPhones(phones);
             }
+        }
+
+        for(int i=0;i<stores.length;i++){
+            System.out.println("Cửa hàng "+(i+1)+": ");
+            System.out.println("\tName: "+ stores[i].getName());
+            System.out.println("\tAndress: "+stores[i].getAddress());
+            System.out.println("\tTổng số smartphone: "+stores[i].getN());
         }
 
     }
