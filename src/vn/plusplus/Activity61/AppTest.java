@@ -7,15 +7,13 @@ import java.util.Scanner;
 public class AppTest{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Store stores;
-        SmartPhone smartPhones;
-        stores = new StoreManagement();
 
         // Nhập vào thông tin các cửa hàng
         System.out.print("Nhập vào số cửa hàng cần quản lí: ");
         int m = input.nextInt();
         input.nextLine();
-        Store[] store = new StoreManagement[m];
+        Store[] store = new Store[m];
+        StoreManagement storeManagement = new StoreManagement();
         for(int i=0;i<store.length;i++) {
             System.out.println("** Nhập vào thông tin cửa hàng thứ " + i);
             System.out.print("\tTên cửa hàng: ");
@@ -25,7 +23,7 @@ public class AppTest{
             System.out.print("\tTổng số điện thoại có trong cửa hàng: ");
             int n = input.nextInt(); // Tổng số điện thoại có trong cửa hàng
             input.nextLine();
-            store[i] = new StoreManagement();
+            store[i] = new StoreManagement(m,store);
             store[i].setName(name);
             store[i].setAddress(address);
             store[i].setN(n);
@@ -33,7 +31,6 @@ public class AppTest{
             //phones = new SmartPhone[n];
             SmartPhone[] phones = new SmartPhone[n];
             for (int j = 0; j < phones.length; j++) {
-                store[i].setPhones(phones);
                 System.out.println(" + Info điện thoại " + j + " có trong cửa hàng " + i);
                 System.out.print("\tThương hiệu: ");
                 String brand = input.next();
@@ -60,7 +57,7 @@ public class AppTest{
                 System.out.print("\tTổng số đã bán được: ");
                 int totalsold = input.nextInt();
                 input.nextLine();
-                phones[j] = new Store();
+                phones[j] = new Store(name,address,n,phones);
                 phones[j].setBrand(brand);
                 phones[j].setHasBluetooth(bluetooth);
                 phones[j].setHas5G(fiveG);
@@ -71,8 +68,11 @@ public class AppTest{
                 phones[j].setPrice(price);
                 phones[j].setTotalSold(totalsold);
             }
+            storeManagement = new StoreManagement(name,address,n,phones,m,store);
         }
-
-
+        store = new StoreManagement[m];
+        for(int i=0;i<store.length;i++){
+            System.out.println(storeManagement.toString());
+        }
     }
 }
