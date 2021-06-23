@@ -79,7 +79,7 @@ public class Store extends SmartPhone {
 
     @Override
     public String toString() {
-        return "Store{" +
+        return " Store{" +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", n=" + n +

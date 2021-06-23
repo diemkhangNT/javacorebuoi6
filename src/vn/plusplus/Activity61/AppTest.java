@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class AppTest{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
+        int sumdt =0;
         // Nhập vào thông tin các cửa hàng
         System.out.print("Nhập vào số cửa hàng cần quản lí: ");
         int m = input.nextInt();
@@ -15,7 +15,7 @@ public class AppTest{
         Store[] store = new Store[m];
         StoreManagement storeManagement = new StoreManagement();
         for(int i=0;i<store.length;i++) {
-            System.out.println("** Nhập vào thông tin cửa hàng thứ " + i);
+            System.out.println("** Nhập vào thông tin cửa hàng thứ " + (i+1));
             System.out.print("\tTên cửa hàng: ");
             String name = input.nextLine(); // Tên cửa hàng
             System.out.print("\tĐịa chỉ của cửa hàng: ");
@@ -32,7 +32,7 @@ public class AppTest{
             SmartPhone[] phones = new SmartPhone[n];
             for (int j = 0; j < phones.length; j++) {
                 store[i].setPhones(phones);
-                System.out.println(" + Info điện thoại " + j + " có trong cửa hàng " + i);
+                System.out.println(" + Info điện thoại thứ " + (j+1) + " có trong cửa hàng " + (i+1));
                 System.out.print("\tThương hiệu: ");
                 String brand = input.next();
                 System.out.println("\tNhập vào true/false: ");
@@ -69,13 +69,17 @@ public class AppTest{
                 phones[j].setPrice(price);
                 phones[j].setTotalSold(totalsold);
                 store[i].setPhones(phones);
+                if(phones[j].isHasBluetooth() && phones[j].isHas5G() && phones[j].isHasWifi()){
+                    sumdt +=1;
+                }
             }
+            storeManagement = new StoreManagement(m,store);
 
         }
-        System.out.println();
+        System.out.println("Thông tin chi tiết các cửa hàng: ");
         System.out.println(storeManagement.toString());
         System.out.println();
-
+        // tìm max/min
         int max = store[0].tongSoDaBan();
         double maxdt = store[0].doanhThu();
         for(int i=0;i<store.length;i++){
@@ -96,31 +100,36 @@ public class AppTest{
                 mindt = store[i].doanhThu();
             }
         }
+        //in ra max/min
         for(int i=0;i<store.length;i++){
             if(max == store[i].tongSoDaBan()){
-                System.out.println("Cua hang thu "+i+" ban nhieu dien thoai nhat: ");
+                System.out.println("Cua hang thu "+(i+1)+" ban nhieu dien thoai nhat: ");
                 System.out.println("\tName: "+store[i].getName());
                 System.out.println("\tAndress: "+store[i].getAddress());
                 System.out.println("\tTong so da ban duoc: "+store[i].tongSoDaBan());
             }
             if(min == store[i].tongSoDaBan()){
-                System.out.println("Cua hang thu "+i+" ban it dien thoai nhat: ");
+                System.out.println("Cua hang thu "+(i+1)+" ban it dien thoai nhat: ");
                 System.out.println("\tName: "+store[i].getName());
                 System.out.println("\tAndress: "+store[i].getAddress());
                 System.out.println("\tTong so da ban duoc: "+store[i].tongSoDaBan());
             }
             if(maxdt == store[i].doanhThu()){
-                System.out.println("Cua hang thu "+i+" co doanh thu cao nhat: ");
+                System.out.println("Cua hang thu "+(i+1)+" co doanh thu cao nhat: ");
                 System.out.println("\tName: "+store[i].getName());
                 System.out.println("\tAndress: "+store[i].getAddress());
-                System.out.println("\tTong so da ban duoc: "+store[i].doanhThu());
+                System.out.println("\tDoanh thu: "+store[i].doanhThu());
             }
             if(mindt == store[i].doanhThu()){
-                System.out.println("Cua hang thu "+i+" co doanh thu thap nhat: ");
+                System.out.println("Cua hang thu "+(i+1)+" co doanh thu thap nhat: ");
                 System.out.println("\tName: "+store[i].getName());
                 System.out.println("\tAndress: "+store[i].getAddress());
-                System.out.println("\tTong so da ban duoc: "+store[i].doanhThu());
+                System.out.println("\tDoanh thu: "+store[i].doanhThu());
             }
         }
+
+        // số lượng điện thoại có 5G,bluetooth, wifi
+        System.out.println("Số lượng điện thoại có Bluetooth, 5G, Wifi: "+ sumdt);
+
     }
 }

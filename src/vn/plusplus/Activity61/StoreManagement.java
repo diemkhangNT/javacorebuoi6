@@ -47,7 +47,7 @@ public class StoreManagement extends Store {
     public String toString() {
         return "StoreManagement{" +
                 "m=" + m +
-                ", stores=" + Arrays.toString(stores) +
+                ", stores=" + "\t"+Arrays.toString(stores) +
                 '}';
     }
 
