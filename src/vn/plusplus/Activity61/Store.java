@@ -1,5 +1,7 @@
 package vn.plusplus.Activity61;
 
+import java.util.Arrays;
+
 public class Store extends SmartPhone {
     // 2.1
     private String name;
@@ -56,11 +58,32 @@ public class Store extends SmartPhone {
         this.phones = phones;
     }
 
-    @Override
-    public int getTotalSold() {
-        return super.getTotalSold();
+    public int tongSoDaBan(){
+        int sum=0;
+        if(phones.length==0){
+            return 0;
+        }else
+             for(int i=0;i<phones.length;i++){
+               sum += phones[i].getTotalSold();
+             }
+        return sum;
     }
-    public long doanhThu(){
-        return getTotalSold()*getPrice();
+
+    public float doanhThu(){
+        float doanhthu=1;
+        for(int i=0;i<phones.length;i++){
+            doanhthu = phones[i].getTotalSold() * phones[i].getPrice();
+        }
+        return doanhthu;
+    }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", n=" + n +
+                ", phones=" + Arrays.toString(phones) +
+                '}';
     }
 }

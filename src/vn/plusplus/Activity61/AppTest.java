@@ -23,7 +23,7 @@ public class AppTest{
             System.out.print("\tTổng số điện thoại có trong cửa hàng: ");
             int n = input.nextInt(); // Tổng số điện thoại có trong cửa hàng
             input.nextLine();
-            store[i] = new StoreManagement(m,store);
+            store[i] = new Store();
             store[i].setName(name);
             store[i].setAddress(address);
             store[i].setN(n);
@@ -31,6 +31,7 @@ public class AppTest{
             //phones = new SmartPhone[n];
             SmartPhone[] phones = new SmartPhone[n];
             for (int j = 0; j < phones.length; j++) {
+                store[i].setPhones(phones);
                 System.out.println(" + Info điện thoại " + j + " có trong cửa hàng " + i);
                 System.out.print("\tThương hiệu: ");
                 String brand = input.next();
@@ -57,7 +58,7 @@ public class AppTest{
                 System.out.print("\tTổng số đã bán được: ");
                 int totalsold = input.nextInt();
                 input.nextLine();
-                phones[j] = new Store(name,address,n,phones);
+                phones[j] = new SmartPhone();
                 phones[j].setBrand(brand);
                 phones[j].setHasBluetooth(bluetooth);
                 phones[j].setHas5G(fiveG);
@@ -67,12 +68,59 @@ public class AppTest{
                 phones[j].setColor(color);
                 phones[j].setPrice(price);
                 phones[j].setTotalSold(totalsold);
+                store[i].setPhones(phones);
             }
-            storeManagement = new StoreManagement(name,address,n,phones,m,store);
+
         }
-        store = new StoreManagement[m];
+        System.out.println();
+        System.out.println(storeManagement.toString());
+        System.out.println();
+
+        int max = store[0].tongSoDaBan();
+        double maxdt = store[0].doanhThu();
         for(int i=0;i<store.length;i++){
-            System.out.println(storeManagement.toString());
+            if(max<store[i].tongSoDaBan()){
+                max = store[i].tongSoDaBan();
+            }
+            if(maxdt<store[i].doanhThu()){
+                maxdt = store[i].doanhThu();
+            }
+        }
+        int min = store[0].tongSoDaBan();
+        double mindt = store[0].doanhThu();
+        for(int i=0;i<store.length;i++){
+            if(min > store[i].tongSoDaBan()){
+                min = store[i].tongSoDaBan();
+            }
+            if(mindt>store[i].doanhThu()){
+                mindt = store[i].doanhThu();
+            }
+        }
+        for(int i=0;i<store.length;i++){
+            if(max == store[i].tongSoDaBan()){
+                System.out.println("Cua hang thu "+i+" ban nhieu dien thoai nhat: ");
+                System.out.println("\tName: "+store[i].getName());
+                System.out.println("\tAndress: "+store[i].getAddress());
+                System.out.println("\tTong so da ban duoc: "+store[i].tongSoDaBan());
+            }
+            if(min == store[i].tongSoDaBan()){
+                System.out.println("Cua hang thu "+i+" ban it dien thoai nhat: ");
+                System.out.println("\tName: "+store[i].getName());
+                System.out.println("\tAndress: "+store[i].getAddress());
+                System.out.println("\tTong so da ban duoc: "+store[i].tongSoDaBan());
+            }
+            if(maxdt == store[i].doanhThu()){
+                System.out.println("Cua hang thu "+i+" co doanh thu cao nhat: ");
+                System.out.println("\tName: "+store[i].getName());
+                System.out.println("\tAndress: "+store[i].getAddress());
+                System.out.println("\tTong so da ban duoc: "+store[i].doanhThu());
+            }
+            if(mindt == store[i].doanhThu()){
+                System.out.println("Cua hang thu "+i+" co doanh thu thap nhat: ");
+                System.out.println("\tName: "+store[i].getName());
+                System.out.println("\tAndress: "+store[i].getAddress());
+                System.out.println("\tTong so da ban duoc: "+store[i].doanhThu());
+            }
         }
     }
 }
